@@ -1,0 +1,89 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "WebFetch",
+      "WebSearch",
+      "Read(//tmp/**)",
+      "Read(__HOME__/.claude/**)",
+      "Read(__HOME__/Dev/**)",
+      "Skill(update-config)",
+      "mcp__github__pull_request_read",
+      "mcp__github__get_file_contents",
+      "mcp__figma-desktop__get_screenshot",
+      "mcp__figma-desktop__get_design_context",
+      "mcp__plugin_slack_slack__slack_search_channels",
+      "mcp__plugin_slack_slack__slack_send_message",
+      "mcp__plugin_figma_figma__get_design_context",
+      "mcp__plugin_figma_figma__get_screenshot",
+      "mcp__plugin_slack_slack__slack_read_channel",
+      "mcp__plugin_slack_slack__slack_search_users",
+      "Skill(schedule)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs",
+      "mcp__claude_ai_Google_Calendar__create_event",
+      "mcp__figma-desktop__get_variable_defs"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus[1m]",
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": false,
+    "claude-code-setup@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "gitkraken-hooks@gitkraken": true,
+    "kotlin-lsp@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "gitkraken": {
+      "source": {
+        "source": "directory",
+        "path": "__HOME__/.claude/plugins/marketplaces/gitkraken"
+      }
+    }
+  },
+  "language": "Russian",
+  "effortLevel": "medium",
+  "advisorModel": "fable",
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "agentPushNotifEnabled": true,
+  "useAutoModeDuringPlan": true,
+  "voiceEnabled": true,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ ! -f '__HOME__/.claude/skills/impeccable/scripts/impeccable' ] || '__HOME__/.claude/skills/impeccable/scripts/impeccable' hook",
+            "timeout": 5,
+            "statusMessage": "Checking UI changes"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ ! -f '__HOME__/.claude/skills/impeccable/scripts/impeccable' ] || '__HOME__/.claude/skills/impeccable/scripts/impeccable' hook",
+            "timeout": 30,
+            "statusMessage": "Design deep pass"
+          }
+        ]
+      }
+    ]
+  }
+}

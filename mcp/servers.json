@@ -1,0 +1,49 @@
+{
+  "$comment": "TEMPLATE. No tokens here, ever — ${VAR} placeholders are filled in by the human at install time.",
+  "servers": {
+    "shadcn": {
+      "scope": "user",
+      "transport": "stdio",
+      "add": "claude mcp add -s user shadcn -- npx -y shadcn@latest mcp",
+      "about": "shadcn components and third-party registries. Registries are configured per project in components.json — shadcn has no global registry config.",
+      "secrets": []
+    },
+    "codegraph": {
+      "scope": "user",
+      "transport": "stdio",
+      "add": "claude mcp add -s user codegraph -- codegraph serve --mcp",
+      "about": "Code graph of a project. Requires npm i -g @colbymchenry/codegraph, see codegraph/SETUP.md",
+      "secrets": []
+    },
+    "github": {
+      "scope": "user",
+      "transport": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "add": "claude mcp add -s user --transport http github https://api.githubcopilot.com/mcp --header \"Authorization: Bearer ${GITHUB_TOKEN}\"",
+      "about": "GitHub through the Copilot MCP endpoint. Needs a PAT with the repo scope.",
+      "secrets": ["GITHUB_TOKEN"]
+    },
+    "figma-desktop": {
+      "scope": "user",
+      "transport": "http",
+      "url": "http://127.0.0.1:3845/mcp",
+      "add": "claude mcp add -s user --transport http figma-desktop http://127.0.0.1:3845/mcp",
+      "about": "Local Figma Desktop server. Only works while the app is running with Dev Mode MCP enabled.",
+      "secrets": []
+    },
+    "firebase": {
+      "scope": "project",
+      "transport": "stdio",
+      "add": "claude mcp add firebase -- npx -y firebase-tools experimental:mcp --dir <project path>",
+      "about": "Added per project rather than globally — it is bound to a directory.",
+      "secrets": []
+    },
+    "MCPMagic": {
+      "scope": "project",
+      "transport": "stdio",
+      "add": "claude mcp add MCPMagic -- node \"$HOME/Library/Containers/kr.co.metadata.mcp/Data/Library/Application Support/MCP Magic/mcp-server.cjs\"",
+      "about": "The local MCP Magic app. The path only exists once that app is installed.",
+      "secrets": []
+    }
+  }
+}

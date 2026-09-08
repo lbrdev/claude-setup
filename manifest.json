@@ -1,0 +1,45 @@
+{
+  "$comment": "Setup declaration. Files under claude/vendor are a snapshot; current versions come from the install commands below.",
+  "generated": "2026-09-08",
+  "skillPackages": [
+    {
+      "name": "impeccable",
+      "source": "https://github.com/pbakaus/impeccable",
+      "license": "Apache-2.0",
+      "install": "npx impeccable@latest install -y --user --providers=claude",
+      "update": "npx impeccable@latest install -y --user --providers=claude --force",
+      "note": "The engine is a platform-specific binary and is not in the snapshot. The installer writes hooks into ./.claude — move them to ~/.claude/settings.json.",
+      "snapshot": "claude/vendor/skills/impeccable",
+      "agents": "claude/vendor/agents"
+    },
+    {
+      "name": "emilkowalski/skills",
+      "source": "https://github.com/emilkowalski/skills",
+      "license": "MIT",
+      "install": "npx skills@latest add emilkowalski/skills -g -a claude-code -s '*' -y --copy",
+      "update": "npx skills@latest update -g",
+      "skills": ["animate", "animate-expo", "animation-vocabulary", "apple-design", "ask-sonner", "emil-design-eng", "find-animation-opportunities", "improve-animations", "pick-ui-library", "prototype", "review-animations", "write-swift"],
+      "snapshot": "claude/vendor/skills"
+    }
+  ],
+  "ownSkills": [
+    { "name": "flexnative", "path": "claude/skills/flexnative", "about": "The @flx shadcn registry: 450 blocks, patterns, intents and illustrations" },
+    { "name": "morphicons", "path": "claude/skills/morphicons", "about": "Morphing stroke icons with spring physics" }
+  ],
+  "plugins": {
+    "marketplace": "anthropics/claude-plugins-official",
+    "enabled": ["claude-code-setup", "claude-md-management", "context7", "figma", "frontend-design", "kotlin-lsp", "slack", "superpowers", "swift-lsp"],
+    "disabled": ["atlassian"],
+    "external": [
+      {
+        "name": "gitkraken-hooks",
+        "marketplace": "gitkraken",
+        "note": "The local marketplace is created by the GitKraken app on install. Do not recreate it by hand: with no GitKraken, drop this from enabledPlugins."
+      }
+    ]
+  },
+  "mcpServers": "mcp/servers.json",
+  "npmTools": [
+    { "name": "@colbymchenry/codegraph", "version": "1.5.0", "install": "npm i -g @colbymchenry/codegraph", "setup": "codegraph/SETUP.md" }
+  ]
+}
